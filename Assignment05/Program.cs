@@ -100,6 +100,44 @@
             #endregion
 
             #region c Anonymous Method (GetISBN)
+            //List<Book> books = new List<Book>
+            //{
+            //    new Book("978-3-16-148410-0", "C# Programming",
+            //        new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M),
+
+            //    new Book("978-0-321-87758-1", "ASP.NET Core Development",
+            //        new string[] { "Michael Brown", "Alice White" }, new DateTime(2023, 10, 5), 59.99M),
+
+            //    new Book("978-1-491-94797-3", "Mastering C#",
+            //        new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
+            //};
+
+            //Func<Book, string> methodOfBooks = delegate (Book book)
+            //{
+            //    return book.Title;
+            //};
+            //Func<Book, string> methodOfBooks01 = delegate (Book book)
+            //{
+            //    string AuthourStr = " ";
+            //    for (int i = 0; i < book.Authours.Length; i++)
+            //    {
+            //        AuthourStr += book.Authours[i];
+
+            //        if (i < book.Authours.Length - 1)
+            //        {
+            //            AuthourStr += " , ";
+            //        }
+            //    }
+            //    return AuthourStr;
+            //};
+            //Func<Book, string> methodOfBooks02 = delegate (Book book)
+            //{
+            //    return book.Price.ToString();
+            //};
+            //LibraryEntry.ProcessBooks(books, methodOfBooks);
+            #endregion
+
+            #region d Lambda Expression (GetPublicationDate).
             List<Book> books = new List<Book>
             {
                 new Book("978-3-16-148410-0", "C# Programming",
@@ -112,11 +150,11 @@
                     new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
             };
 
-            Func<Book, string> methodOfBooks = delegate (Book book)
+            Func<Book, string> methodOfBooks =  (Book book) =>
             {
                 return book.Title;
             };
-            Func<Book, string> methodOfBooks01 = delegate (Book book)
+            Func<Book, string> methodOfBooks01 =  (Book book) =>
             {
                 string AuthourStr = " ";
                 for (int i = 0; i < book.Authours.Length; i++)
@@ -130,7 +168,7 @@
                 }
                 return AuthourStr;
             };
-            Func<Book, string> methodOfBooks02 = delegate (Book book)
+            Func<Book, string> methodOfBooks02 =  (Book book) =>
             {
                 return book.Price.ToString();
             };
