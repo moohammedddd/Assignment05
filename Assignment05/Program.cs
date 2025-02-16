@@ -63,20 +63,39 @@
 
             #region Part02
             #region A Create User Defined Delegate with the same signature of methods existed in Bookfunctions class.
+            //List<Book> books = new List<Book>
+            //{
+            //    new Book("978-3-16-148410-0", "C# Programming",
+            //        new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M),
+
+            //    new Book("978-0-321-87758-1", "ASP.NET Core Development",
+            //        new string[] { "Michael Brown", "Alice White" }, new DateTime(2023, 10, 5), 59.99M),
+
+            //    new Book("978-1-491-94797-3", "Mastering C#",
+            //        new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
+            //};
+            //MethodOfBooks<Book, string> methodOfBooks = BookFunction.GetTitle;
+            //MethodOfBooks<Book, string> methodOfBooks01 = BookFunction.GetAuthour;
+            //MethodOfBooks<Book, string> methodOfBooks02 = BookFunction.GetPrice;
+            //LibraryEntry.ProcessBooks(books, methodOfBooks);
+            #endregion
+
+            #region  b Use the Proper build in delegate
             List<Book> books = new List<Book>
-            {
-                new Book("978-3-16-148410-0", "C# Programming",
-                    new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M),
+        {
+            new Book("978-3-16-148410-0", "C# Programming",
+                new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M),
 
-                new Book("978-0-321-87758-1", "ASP.NET Core Development",
-                    new string[] { "Michael Brown", "Alice White" }, new DateTime(2023, 10, 5), 59.99M),
+            new Book("978-0-321-87758-1", "ASP.NET Core Development",
+                new string[] { "Michael Brown", "Alice White" }, new DateTime(2023, 10, 5), 59.99M),
 
-                new Book("978-1-491-94797-3", "Mastering C#",
-                    new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
-            };
-            MethodOfBooks<Book, string> methodOfBooks = BookFunction.GetTitle;
-            MethodOfBooks<Book, string> methodOfBooks01 = BookFunction.GetAuthour;
-            MethodOfBooks<Book, string> methodOfBooks02 = BookFunction.GetPrice;
+            new Book("978-1-491-94797-3", "Mastering C#",
+                new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
+        };
+
+            Func<Book, string> methodOfBooks = BookFunction.GetTitle;
+            Func<Book, string> methodOfBooks01 = BookFunction.GetAuthour;
+            Func<Book, string> methodOfBooks02 = BookFunction.GetPrice;
             LibraryEntry.ProcessBooks(books, methodOfBooks);
             #endregion
             #endregion
@@ -113,11 +132,11 @@
 
 
         #region PartTwo
-        public delegate TResult MethodOfBooks<in T1, out TResult>(T1 Book);
+       // public delegate TResult MethodOfBooks<in T1, out TResult>(T1 Book);
 
         public class LibraryEntry
         {
-            public static void ProcessBooks(List<Book> bList, MethodOfBooks<Book, string> methodOfBooks)
+            public static void ProcessBooks(List<Book> bList, Func<Book, string> methodOfBooks)
             {
                 foreach (Book B in bList)
                 {
