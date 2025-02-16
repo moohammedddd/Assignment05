@@ -47,19 +47,40 @@
         static void Main(string[] args)
         {
             #region Part01
-            Book book1 = new Book("978-3-16-148410-0", "C# Programming",
-               new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M);
-            Book book2 = new Book("978-3-16-148410-0", "C# Programming",
-               new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M);
+            //Book book1 = new Book("978-3-16-148410-0", "C# Programming",
+            //   new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M);
+            //Book book2 = new Book("978-3-16-148410-0", "C# Programming",
+            //   new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M);
 
-            Console.WriteLine(book1);
-            string Price = BookFunction.GetPrice(book1);
-            Console.WriteLine(Price);
-             string Authours = BookFunction.GetAuthour(book1);
-            Console.WriteLine(Authours);
-             string Title = BookFunction.GetTitle(book1);
-            Console.WriteLine(Title);
+            //Console.WriteLine(book1);
+            //string Price = BookFunction.GetPrice(book1);
+            //Console.WriteLine(Price);
+            // string Authours = BookFunction.GetAuthour(book1);
+            //Console.WriteLine(Authours);
+            // string Title = BookFunction.GetTitle(book1);
+            //Console.WriteLine(Title);
             #endregion
+
+            #region Part02
+            #region A Create User Defined Delegate with the same signature of methods existed in Bookfunctions class.
+            List<Book> books = new List<Book>
+            {
+                new Book("978-3-16-148410-0", "C# Programming",
+                    new string[] { "John Doe", "Jane Smith" }, new DateTime(2024, 2, 16), 49.99M),
+
+                new Book("978-0-321-87758-1", "ASP.NET Core Development",
+                    new string[] { "Michael Brown", "Alice White" }, new DateTime(2023, 10, 5), 59.99M),
+
+                new Book("978-1-491-94797-3", "Mastering C#",
+                    new string[] { "David Green" }, new DateTime(2022, 6, 12), 39.99M)
+            };
+            MethodOfBooks<Book, string> methodOfBooks = BookFunction.GetTitle;
+            MethodOfBooks<Book, string> methodOfBooks01 = BookFunction.GetAuthour;
+            MethodOfBooks<Book, string> methodOfBooks02 = BookFunction.GetPrice;
+            LibraryEntry.ProcessBooks(books, methodOfBooks);
+            #endregion
+            #endregion
+
         }
 
         #region Part01 Method
@@ -91,6 +112,19 @@
         #endregion
 
 
+        #region PartTwo
+        public delegate TResult MethodOfBooks<in T1, out TResult>(T1 Book);
 
+        public class LibraryEntry
+        {
+            public static void ProcessBooks(List<Book> bList, MethodOfBooks<Book, string> methodOfBooks)
+            {
+                foreach (Book B in bList)
+                {
+                    Console.WriteLine(methodOfBooks(B));
+                }
+            }
+        }
+        #endregion
     }
 }
